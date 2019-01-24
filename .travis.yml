@@ -1,5 +1,11 @@
 language: java
+services:
+  - mysql
 jdk:
   - oraclejdk11
 before_install:
   - chmod +x mvnw
+install:
+  - ./mvnw install -Dprofile=prod -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+before_script:
+  - mysql -e "CREATE DATABASE req_system;" -u root
