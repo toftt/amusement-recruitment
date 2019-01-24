@@ -16,6 +16,7 @@ script:
 after_script:
   - docker images
 deploy:
+  skip_cleanup: true
   provider: script
   script:
     docker tag org.toft.recsystem/recsystem registry.heroku.com/$HEROKU_APP_NAME/web
