@@ -9,3 +9,5 @@ install:
   - ./mvnw install -Dprofile=prod -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_script:
   - mysql -e "CREATE DATABASE req_system;" -u root
+script:
+  - ./mvnw test -Dprofile=prod -B
