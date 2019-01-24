@@ -5,6 +5,8 @@ jdk:
   - oraclejdk11
 before_install:
   - chmod +x mvnw
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 install:
   - ./mvnw install -Dspring.profiles.active=prod -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_script:
