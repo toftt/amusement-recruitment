@@ -11,4 +11,6 @@ before_script:
   - mysql -e "CREATE DATABASE req_system;" -u root
 script:
   - ./mvnw test -Dspring.profiles.active=prod
-
+branches:
+  only:
+    - master
