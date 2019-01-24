@@ -5,12 +5,21 @@ jdk:
   - oraclejdk11
 before_install:
   - chmod +x mvnw
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 install:
   - ./mvnw install -Dspring.profiles.active=prod -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_script:
   - mysql -e "CREATE DATABASE req_system;" -u root
 script:
   - ./mvnw test -Dspring.profiles.active=prod
+after_script:
+  - docker images
+deploy:
+  provider: script
+  script:
+    docker tag org.toft.recsystem/recsystem registry.heroku.com/$HEROKU_APP_NAME/web
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web
 branches:
   only:
     - master
