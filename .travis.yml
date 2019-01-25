@@ -20,7 +20,7 @@ deploy:
   provider: script
   script:
     docker images;
-    docker tag org.toft.recsystem/recsystem:latest registry.heroku.com/$HEROKU_APP_NAME/web;
+    docker tag org.toft.recsystem/recsystem registry.heroku.com/$HEROKU_APP_NAME/web;
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
 branches:
   only:
