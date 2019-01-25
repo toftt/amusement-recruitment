@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "$WEB_DOCKER_IMAGE_ID"
 curl -n -X PATCH https://api.heroku.com/apps/$HEROKU_APP_NAME/formation \
   -d '{
   "updates": [
