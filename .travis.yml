@@ -8,11 +8,11 @@ before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
   - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 install:
-  - ./mvnw install -Dspring.profiles.active=prod -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - ./mvnw install -Dspring.profiles.active=test -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_script:
   - mysql -e "CREATE DATABASE req_system;" -u root
 script:
-  - ./mvnw test -Dspring.profiles.active=prod
+  - ./mvnw test -Dspring.profiles.active=test
 after_script:
   - docker images
 deploy:
