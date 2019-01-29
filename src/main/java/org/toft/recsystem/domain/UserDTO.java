@@ -1,20 +1,23 @@
 package org.toft.recsystem.domain;
 
+import lombok.Getter;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Getter
 public class UserDTO {
     @NotNull
     @NotEmpty
-    String name;
+    String firstName;
 
     @NotNull
     @NotEmpty
-    String surname;
+    String lastName;
 
     @NotNull
     @NotEmpty
-    String ssn;
+    String socialSecurityNumber;
 
     @NotNull
     @NotEmpty

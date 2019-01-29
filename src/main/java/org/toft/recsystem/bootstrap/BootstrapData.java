@@ -38,14 +38,14 @@ public class BootstrapData implements CommandLineRunner {
         competenceRepository.save(c2);
 
         Role r1 = new Role();
-        r1.setName("Recruiter");
+        r1.setName("Applicant");
         roleRepository.save(r1);
 
         User u1 = new User();
         u1.setEmail("jtoft@kth.se");
-        u1.setName("Joachim");
-        u1.setSurname("Toft");
-        u1.setSsn("930529");
+        u1.setFirstName("Joachim");
+        u1.setLastName("Toft");
+        u1.setSocialSecurityNumber("930529");
         u1.setRole(r1);
         u1.setUsername("toftt");
         u1.setPassword("password123");

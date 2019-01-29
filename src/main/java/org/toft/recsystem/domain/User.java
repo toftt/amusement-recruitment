@@ -14,9 +14,9 @@ public class User {
     @ManyToOne
     private Role role;
 
-    private String name;
-    private String surname;
-    private String ssn;
+    private String firstName;
+    private String lastName;
+    private String socialSecurityNumber;
     private String email;
     private String password;
     private String username;
