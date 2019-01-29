@@ -1,22 +1,21 @@
 package org.toft.recsystem.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.toft.recsystem.domain.User;
 import org.toft.recsystem.domain.UserDTO;
-import org.toft.recsystem.repositories.RoleRepository;
 import org.toft.recsystem.repositories.UserRepository;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public User registerNewUser(UserDTO userDTO) {
