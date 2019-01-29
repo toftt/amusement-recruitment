@@ -3,7 +3,7 @@ package org.toft.recsystem.domain;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class PersonDTO {
+public class UserDTO {
     @NotNull
     @NotEmpty
     String name;
