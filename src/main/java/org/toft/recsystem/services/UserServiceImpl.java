@@ -1,11 +1,15 @@
 package org.toft.recsystem.services;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.toft.recsystem.domain.EmailAlreadyExistsException;
 import org.toft.recsystem.domain.User;
 import org.toft.recsystem.domain.UserDTO;
 import org.toft.recsystem.repositories.UserRepository;
+
+import static java.util.Collections.emptyList;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,6 +20,16 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) throw new UsernameNotFoundException(username);
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+                                                                      user.getPassword(),
+                                                                      emptyList());
     }
 
     @Override
