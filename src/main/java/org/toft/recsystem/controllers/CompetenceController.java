@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(CompetenceController.BASE_URL)
 public class CompetenceController {
 
-    public static final String BASE_URL = "/api/v1/competences";
+    static final String BASE_URL = "/api/v1/competences";
 
     private final CompetenceService competenceService;
 

@@ -2,6 +2,7 @@ package org.toft.recsystem.services;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.toft.recsystem.domain.EmailAlreadyExistsException;
 import org.toft.recsystem.domain.User;
 import org.toft.recsystem.domain.UserDTO;
 import org.toft.recsystem.repositories.UserRepository;
@@ -18,14 +19,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerNewUser(UserDTO userDTO) {
-        User user = new User();
+    public User registerNewUser(final UserDTO userDTO) {
+        if (emailExists(userDTO.getEmail())) {
+            throw new EmailAlreadyExistsException("User with email " + userDTO.getEmail() + "already exists." );
+        }
+
+        final User user = new User();
+
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
         user.setUsername(userDTO.getUsername());
         user.setSocialSecurityNumber(userDTO.getSocialSecurityNumber());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
         return userRepository.save(user);
+    }
+
+
+    private boolean emailExists(final String email) {
+        return userRepository.findByEmail(email) != null;
     }
 }
