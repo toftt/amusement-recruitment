@@ -14,14 +14,14 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing.unit,
         minWidth: '25vw',
     },
-    container: {
+    outerContainer: {
         //background: 'linear-gradient(to bottom, #1db954 0%,#1db954 59%,#7cb791 100%)',
+        minHeight: '100vh',
+        width: '100vw',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '100vh',
-        width: '100vw',
 
         '& > *': {
             margin: '3rem',
@@ -30,42 +30,46 @@ const useStyles = makeStyles(theme => ({
     typography: {
         fontSize: '4rem',
     },
+    innerContainer: {
+    },
 }));
 
 function FrontPage(props) {
     const classes = useStyles();
     const { key, pathname } = props.location;
     return (
-        <div className={classes.container}>
-            {/* <Typography className={classes.typography}>Amusement Recruitment</Typography> */}
-            <Tabs
-                value={pathname === '/login' ? 0 : 1}
-                indicatorColor="primary"
-                textColor="primary"
-                centered
-            >
-                <Tab label="Login" component={Link} to="/login" />
-                <Tab label="Sign up" component={Link} to="/registration" />
-            </Tabs>
-            <TransitionGroup>
-                <CSSTransition
-                  key={key}
-                  classNames="fade"
-                  timeout={10}
+        <div className={classes.outerContainer}>
+            <div className={classes.innerContainer}>
+                {/* <Typography className={classes.typography}>Amusement Recruitment</Typography> */}
+                <Tabs
+                    value={pathname === '/login' ? 0 : 1}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    centered
                 >
-                    <Switch>
-                        <Route path={'/login'} component={Login} />
-                        <Route path={'/registration'} component={Registration} />
-                    </Switch>
-                </CSSTransition>
-            </TransitionGroup>
-            <Button
-                variant="outlined"
-                className={classes.button}
-                size="large"
-            >
-                Login
-            </Button>
+                    <Tab label="Login" component={Link} to="/login" />
+                    <Tab label="Sign up" component={Link} to="/registration" />
+                </Tabs>
+                <TransitionGroup>
+                    <CSSTransition
+                    key={key}
+                    classNames="fade"
+                    timeout={10}
+                    >
+                        <Switch>
+                            <Route path={'/login'} component={Login} />
+                            <Route path={'/registration'} component={Registration} />
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+                <Button
+                    variant="outlined"
+                    className={classes.button}
+                    size="large"
+                >
+                    Login
+                </Button>
+            </div>
         </div>
     );
 }
