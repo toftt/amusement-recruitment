@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class StaticController {
 
-    @RequestMapping(value = {"/", "login", "register"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login", "/register"}, method = RequestMethod.GET)
     public String getFallback() {
-        return "index";
+
+        return "index.html";
     }
 }

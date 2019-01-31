@@ -29,6 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.POST, SecurityConstants.REGISTRATION_URL).permitAll()
                 .mvcMatchers(HttpMethod.GET, "/login").permitAll()
                 .mvcMatchers(HttpMethod.GET,"/registration").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/static/**").permitAll()
                 .mvcMatchers(HttpMethod.GET,"/").permitAll()
                 .anyRequest().authenticated()
                 .and()
