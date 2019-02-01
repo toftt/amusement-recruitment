@@ -51,6 +51,8 @@ function Registration() {
       setState({ ...state, hasFailedSubmit: true });
       return;
     }
+    
+    return;
   };
 
   return (
