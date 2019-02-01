@@ -10,21 +10,21 @@ const useStyles = makeStyles(theme => {
     container: {
       display: 'flex',
       flexDirection: 'column',
-      width: '400px',
+      width: '400px'
     },
     textField: {
       root: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         dense: {
-          marginTop: 16,
-        },
-      },
+          marginTop: 16
+        }
+      }
     },
     button: {
       margin: theme.spacing.unit,
-      minWidth: '25vw',
-    },
+      minWidth: '25vw'
+    }
   };
 });
 
@@ -33,14 +33,14 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     login({ username, password })
       .then(response => {
         const token = response.headers.authorization.split(' ')[1];
         localStorage.setItem('token', token);
       })
-      .catch(error => console.log(error));
+      .catch(() => {});
   };
 
   return (
@@ -75,7 +75,7 @@ function Login() {
         className={classes.button}
         onClick={handleSubmit}
       >
-      Login
+        Login
       </Button>
     </form>
   );

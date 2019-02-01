@@ -11,7 +11,7 @@
 *.htm           text
 *.html          text
 *.java          text
-*.js            text
+*.js            text eol=lf
 *.json          text
 *.jsp           text
 *.jspf          text
