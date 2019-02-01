@@ -1,9 +1,7 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/styles';
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Route, Switch, Link, withRouter } from 'react-router-dom';
 
 import Login from '../components/Login';
@@ -50,25 +48,11 @@ function FrontPage(props) {
                     <Tab label="Login" component={Link} to="/login" />
                     <Tab label="Sign up" component={Link} to="/registration" />
                 </Tabs>
-                <TransitionGroup>
-                    <CSSTransition
-                    key={key}
-                    classNames="fade"
-                    timeout={10}
-                    >
-                        <Switch>
-                            <Route path={'/login'} component={Login} />
-                            <Route path={'/registration'} component={Registration} />
-                        </Switch>
-                    </CSSTransition>
-                </TransitionGroup>
-                <Button
-                    variant="outlined"
-                    className={classes.button}
-                    size="large"
-                >
-                    Login
-                </Button>
+                <Switch>
+                    <Route path={'/login'} component={Login} />
+                    <Route path={'/registration'} component={Registration} />
+                </Switch>
+
             </div>
         </div>
     );
