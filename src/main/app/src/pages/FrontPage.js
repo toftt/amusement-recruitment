@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 function FrontPage(props) {
     const classes = useStyles();
-    const { key, pathname } = props.location;
+    const { pathname } = props.location;
     return (
         <div className={classes.outerContainer}>
             <div className={classes.innerContainer}>
