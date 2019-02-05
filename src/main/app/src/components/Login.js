@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/styles';
 
 import { login } from '../api';
+import AuthContext from '../AuthContext';
 
 const useStyles = makeStyles(theme => {
   return {
     container: {
       display: 'flex',
-      flexDirection: 'column',
-      width: '400px'
+      flexDirection: 'column'
     },
     textField: {
       root: {
@@ -32,13 +32,14 @@ function Login() {
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { setState } = useContext(AuthContext);
 
   const handleSubmit = e => {
     e.preventDefault();
     login({ username, password })
       .then(response => {
         const token = response.headers.authorization.split(' ')[1];
-        localStorage.setItem('token', token);
+        setState(previousState => ({ ...previousState, token }));
       })
       .catch(() => {});
   };

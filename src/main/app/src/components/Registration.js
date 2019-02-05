@@ -4,12 +4,13 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import reduce from 'lodash/reduce';
 
+import { register } from '../api';
+
 const useStyles = makeStyles(theme => {
   return {
     container: {
       display: 'flex',
-      flexDirection: 'column',
-      width: '400px'
+      flexDirection: 'column'
     },
     textField: {
       root: {
@@ -54,6 +55,10 @@ function Registration() {
     if (!formIsValid) {
       setState({ ...state, hasFailedSubmit: true });
     }
+
+    register(state)
+      .then(() => {})
+      .catch(() => {});
   };
 
   return (
@@ -92,6 +97,7 @@ function Registration() {
         margin="normal"
         variant="outlined"
         value={state.socialSecurityNumber}
+        placeholder="XXXX XX XX-XXXX"
         onChange={handleChange('socialSecurityNumber')}
         error={isEmptyError('socialSecurityNumber')}
       />
