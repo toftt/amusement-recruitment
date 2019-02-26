@@ -38,7 +38,7 @@ public class BootstrapData implements CommandLineRunner {
         competenceRepository.save(c1);
 
         Competence c2 = new Competence();
-        c2.setName("Rollerblades ");
+        c2.setName("Rollerblades");
         competenceRepository.save(c2);
 
         Role r1 = new Role();

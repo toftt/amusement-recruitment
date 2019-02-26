@@ -2,9 +2,12 @@ package org.toft.recsystem.services;
 
 import org.springframework.stereotype.Service;
 import org.toft.recsystem.domain.Competence;
+import org.toft.recsystem.domain.CompetenceDTO;
 import org.toft.recsystem.repositories.CompetenceRepository;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class CompetenceServiceImpl implements CompetenceService {
@@ -21,7 +24,11 @@ public class CompetenceServiceImpl implements CompetenceService {
     }
 
     @Override
-    public List<Competence> findAllCompetences() {
-        return competenceRepository.findAll();
+    public List<CompetenceDTO> findAllCompetences() {
+        return competenceRepository
+                .findAll()
+                .stream()
+                .map(CompetenceDTO::new)
+                .collect(Collectors.toList());
     }
 }
