@@ -11,14 +11,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.toft.recsystem.services.UserServiceImpl;
+import org.toft.recsystem.services.UserService;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-    private UserServiceImpl userDetailsService;
+    private UserService userDetailsService;
     private PasswordEncoder passwordEncoder;
 
-    public WebSecurity(UserServiceImpl userDetailsService, PasswordEncoder passwordEncoder) {
+    public WebSecurity(UserService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }

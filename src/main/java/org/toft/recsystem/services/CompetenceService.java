@@ -1,7 +1,7 @@
 package org.toft.recsystem.services;
 
 import org.toft.recsystem.domain.Competence;
-import org.toft.recsystem.domain.CompetenceDTO;
+import org.toft.recsystem.domain.dtos.CompetenceDTO;
 
 import java.util.List;
 

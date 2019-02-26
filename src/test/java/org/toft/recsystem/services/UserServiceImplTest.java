@@ -4,10 +4,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.toft.recsystem.domain.UserDTO;
+import org.toft.recsystem.domain.User;
+import org.toft.recsystem.domain.dtos.UserDTO;
 import org.toft.recsystem.repositories.UserRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserServiceImplTest {
 
     @Autowired
-    private UserServiceImpl userService;
+    private ModelMapper modelMapper;
+    @Autowired
+    private UserService userService;
     @Autowired
     private UserRepository userRepository;
     private UserDTO userDTO;
@@ -37,8 +41,8 @@ class UserServiceImplTest {
     @Test
     void registerNewUser() {
         long beforeCount = userRepository.count();
-
-        userService.registerNewUser(userDTO);
+        User user = modelMapper.map(userDTO, User.class);
+        userService.registerNewUser(user);
 
         assertEquals(beforeCount + 1, userRepository.count());
     }

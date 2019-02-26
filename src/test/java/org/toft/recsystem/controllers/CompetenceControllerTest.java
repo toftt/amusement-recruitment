@@ -36,7 +36,7 @@ class CompetenceControllerTest {
 
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("api/v1/competences"),
+                createURLWithPort("/api/v1/competences"),
                 HttpMethod.GET, entity, String.class);
 
         String expected = "[{name:\"Hot Dog Bbq\"},{name:\"Rollerblades\"}]";

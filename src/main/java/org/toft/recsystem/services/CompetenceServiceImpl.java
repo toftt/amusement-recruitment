@@ -2,11 +2,10 @@ package org.toft.recsystem.services;
 
 import org.springframework.stereotype.Service;
 import org.toft.recsystem.domain.Competence;
-import org.toft.recsystem.domain.CompetenceDTO;
+import org.toft.recsystem.domain.dtos.CompetenceDTO;
 import org.toft.recsystem.repositories.CompetenceRepository;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service

@@ -1,4 +1,4 @@
-package org.toft.recsystem.domain;
+package org.toft.recsystem.domain.exceptions;
 
 public class EmailAlreadyExistsException extends RuntimeException {
 

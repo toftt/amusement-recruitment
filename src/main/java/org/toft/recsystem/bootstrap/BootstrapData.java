@@ -1,14 +1,16 @@
 package org.toft.recsystem.bootstrap;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.toft.recsystem.domain.Competence;
 import org.toft.recsystem.domain.Role;
-import org.toft.recsystem.domain.UserDTO;
+import org.toft.recsystem.domain.User;
+import org.toft.recsystem.domain.dtos.UserDTO;
 import org.toft.recsystem.repositories.CompetenceRepository;
 import org.toft.recsystem.repositories.UserRepository;
 import org.toft.recsystem.repositories.RoleRepository;
-import org.toft.recsystem.services.UserServiceImpl;
+import org.toft.recsystem.services.UserService;
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -16,16 +18,19 @@ public class BootstrapData implements CommandLineRunner {
     private CompetenceRepository competenceRepository;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private UserServiceImpl userService;
+    private UserService userService;
+    private ModelMapper modelMapper;
 
     public BootstrapData(CompetenceRepository competenceRepository,
                          UserRepository userRepository,
                          RoleRepository roleRepository,
-                         UserServiceImpl userService) {
+                         UserService userService,
+                         ModelMapper modelMapper) {
         this.competenceRepository = competenceRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -45,14 +50,17 @@ public class BootstrapData implements CommandLineRunner {
         r1.setName("Applicant");
         roleRepository.save(r1);
 
-        UserDTO u1 = new UserDTO();
-        u1.setEmail("jtoft@kth.se");
-        u1.setFirstName("Joachim");
-        u1.setLastName("Toft");
-        u1.setSocialSecurityNumber("930529");
-        u1.setUsername("toftt");
-        u1.setPassword("password123");
-        userService.registerNewUser(u1);
+        UserDTO userDTO = UserDTO.builder()
+                .firstName("Joachim")
+                .lastName("Toft")
+                .email("jtoft@kth.se")
+                .socialSecurityNumber("930529")
+                .username("toftt")
+                .password("password123")
+                .build();
+
+        User user = modelMapper.map(userDTO, User.class);
+        userService.registerNewUser(user);
 
         System.out.println("Competences saved: " + competenceRepository.count());
         System.out.println("People saved: " + userRepository.count());
