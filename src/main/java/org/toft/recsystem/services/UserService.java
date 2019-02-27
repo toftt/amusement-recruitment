@@ -1,5 +1,6 @@
 package org.toft.recsystem.services;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,9 +27,7 @@ public class UserService implements UserDetailsService {
         final WebsiteUser user = userRepository.findByUsername(username);
         if (user == null) throw new UsernameNotFoundException(username);
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                                                                      user.getPassword(),
-                                                                      emptyList());
+        return new User(user.getUsername(), user.getPassword(), emptyList());
     }
 
     public WebsiteUser registerNewUser(final WebsiteUser user) {

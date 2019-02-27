@@ -13,7 +13,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.toft.recsystem.services.UserService;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserService userDetailsService;
     private PasswordEncoder passwordEncoder;
@@ -29,14 +29,16 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.POST, SecurityConstants.REGISTRATION_URL).permitAll()
                 .mvcMatchers(HttpMethod.POST, "/login").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/login").permitAll()
-                .mvcMatchers(HttpMethod.GET,"/registration").permitAll()
+                .mvcMatchers(HttpMethod.GET,"/register").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/static/**").permitAll()
                 .mvcMatchers(HttpMethod.GET,"/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(new ExceptionHandlerFilter(), JWTAuthenticationFilter.class);
     }
 
     @Override
