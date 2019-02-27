@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.toft.recsystem.domain.User;
+import org.toft.recsystem.domain.WebsiteUser;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
-            User credentials = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            WebsiteUser credentials = new ObjectMapper().readValue(request.getInputStream(), WebsiteUser.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

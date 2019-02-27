@@ -3,7 +3,7 @@ package org.toft.recsystem.controllers;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.toft.recsystem.domain.dtos.CompetenceDTO;
+import org.toft.recsystem.domain.dtos.CompetenceDto;
 import org.toft.recsystem.services.CompetenceService;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class CompetenceController {
     }
 
     @GetMapping
-    List<CompetenceDTO> getAllCompetences() {
+    List<CompetenceDto> getAllCompetences() {
         return competenceService.findAllCompetences();
     }
 }

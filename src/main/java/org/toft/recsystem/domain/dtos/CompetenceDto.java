@@ -4,10 +4,10 @@ import lombok.Getter;
 import org.toft.recsystem.domain.Competence;
 
 @Getter
-public class CompetenceDTO {
+public class CompetenceDto {
     private String name;
 
-    public CompetenceDTO(Competence competence) {
+    public CompetenceDto(Competence competence) {
         this.name = competence.getName();
     }
 }

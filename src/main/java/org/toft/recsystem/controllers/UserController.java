@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.toft.recsystem.domain.User;
-import org.toft.recsystem.domain.dtos.UserDTO;
+import org.toft.recsystem.domain.WebsiteUser;
+import org.toft.recsystem.domain.dtos.WebsiteUserDto;
 import org.toft.recsystem.services.UserService;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,9 +30,9 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO saveUser(@RequestBody final UserDTO userDTO) {
-        final User user = convertToEntity(userDTO);
-        User createdUser = userService.registerNewUser(user);
+    public WebsiteUserDto saveUser(@Valid @RequestBody final WebsiteUserDto userDTO) {
+        final WebsiteUser user = convertToEntity(userDTO);
+        WebsiteUser createdUser = userService.registerNewUser(user);
         return convertToDto(createdUser);
     }
 
@@ -44,11 +45,11 @@ public class UserController {
         return ResponseEntity.ok(model);
     }
 
-    private UserDTO convertToDto(final User user) {
-        return modelMapper.map(user, UserDTO.class);
+    private WebsiteUserDto convertToDto(final WebsiteUser user) {
+        return modelMapper.map(user, WebsiteUserDto.class);
     }
 
-    private User convertToEntity(final UserDTO userDTO) {
-        return modelMapper.map(userDTO, User.class);
+    private WebsiteUser convertToEntity(final WebsiteUserDto userDTO) {
+        return modelMapper.map(userDTO, WebsiteUser.class);
     }
 }

@@ -5,8 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.toft.recsystem.domain.Competence;
 import org.toft.recsystem.domain.Role;
-import org.toft.recsystem.domain.User;
-import org.toft.recsystem.domain.dtos.UserDTO;
+import org.toft.recsystem.domain.WebsiteUser;
+import org.toft.recsystem.domain.dtos.WebsiteUserDto;
 import org.toft.recsystem.repositories.CompetenceRepository;
 import org.toft.recsystem.repositories.UserRepository;
 import org.toft.recsystem.repositories.RoleRepository;
@@ -50,7 +50,7 @@ public class BootstrapData implements CommandLineRunner {
         r1.setName("Applicant");
         roleRepository.save(r1);
 
-        UserDTO userDTO = UserDTO.builder()
+        WebsiteUserDto userDTO = WebsiteUserDto.builder()
                 .firstName("Joachim")
                 .lastName("Toft")
                 .email("jtoft@kth.se")
@@ -59,7 +59,7 @@ public class BootstrapData implements CommandLineRunner {
                 .password("password123")
                 .build();
 
-        User user = modelMapper.map(userDTO, User.class);
+        WebsiteUser user = modelMapper.map(userDTO, WebsiteUser.class);
         userService.registerNewUser(user);
 
         System.out.println("Competences saved: " + competenceRepository.count());

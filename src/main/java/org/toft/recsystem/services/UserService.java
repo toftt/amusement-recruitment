@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.toft.recsystem.domain.exceptions.EmailAlreadyExistsException;
-import org.toft.recsystem.domain.User;
+import org.toft.recsystem.domain.WebsiteUser;
 import org.toft.recsystem.repositories.UserRepository;
 
 import static java.util.Collections.emptyList;
@@ -23,7 +23,7 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final User user = userRepository.findByUsername(username);
+        final WebsiteUser user = userRepository.findByUsername(username);
         if (user == null) throw new UsernameNotFoundException(username);
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
@@ -31,9 +31,9 @@ public class UserService implements UserDetailsService {
                                                                       emptyList());
     }
 
-    public User registerNewUser(final User user) {
+    public WebsiteUser registerNewUser(final WebsiteUser user) {
         if (emailExists(user.getEmail())) {
-            throw new EmailAlreadyExistsException("User with email " + user.getEmail() + "already exists." );
+            throw new EmailAlreadyExistsException("WebsiteUser with email " + user.getEmail() + "already exists." );
         }
 
         String encodedPassword = passwordEncoder.encode(user.getPassword());

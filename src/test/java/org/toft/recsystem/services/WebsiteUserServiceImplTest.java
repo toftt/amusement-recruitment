@@ -8,8 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.toft.recsystem.domain.User;
-import org.toft.recsystem.domain.dtos.UserDTO;
+import org.toft.recsystem.domain.WebsiteUser;
+import org.toft.recsystem.domain.dtos.WebsiteUserDto;
 import org.toft.recsystem.repositories.UserRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UserServiceImplTest {
+class WebsiteUserServiceImplTest {
 
     @Autowired
     private ModelMapper modelMapper;
@@ -25,11 +25,11 @@ class UserServiceImplTest {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
-    private UserDTO userDTO;
+    private WebsiteUserDto userDTO;
 
     @BeforeAll
     void setupUserDTO() {
-        userDTO = new UserDTO();
+        userDTO = new WebsiteUserDto();
 
         userDTO.setUsername("Joachim");
         userDTO.setLastName("Toft");
@@ -41,7 +41,7 @@ class UserServiceImplTest {
     @Test
     void registerNewUser() {
         long beforeCount = userRepository.count();
-        User user = modelMapper.map(userDTO, User.class);
+        WebsiteUser user = modelMapper.map(userDTO, WebsiteUser.class);
         userService.registerNewUser(user);
 
         assertEquals(beforeCount + 1, userRepository.count());
